@@ -1,0 +1,16 @@
+﻿@{
+    ViewData["Title"] = "Confirmação para apagar o contato";
+}
+
+<div class="text-center">
+
+    <h3 class="">Realmente deseja apagar o contato NomeContato ?</h3>
+
+</div>
+<div class="text-center">
+
+    <a class="btn btn-primary btn-block" role="button" asp-controller="Contato" asp-action="Index">Cancelar exclusão</a>
+    <a class="btn btn-danger btn-block" role="button" asp-controller="Contato" asp-action="Destroy">Confimar exclusão</a>
+
+</div>
+
