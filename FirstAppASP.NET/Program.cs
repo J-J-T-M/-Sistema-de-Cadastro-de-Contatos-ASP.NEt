@@ -1,3 +1,6 @@
+using FirstAppASP.NET.Data;
+using Microsoft.EntityFrameworkCore;
+
 namespace FirstAppASP.NET
 {
     public class Program
@@ -8,6 +11,11 @@ namespace FirstAppASP.NET
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddDbContext<BancoContext>( options =>
+            {
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DataBase"));
+            });
 
             var app = builder.Build();
 
