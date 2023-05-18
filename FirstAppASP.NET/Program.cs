@@ -1,4 +1,5 @@
 using FirstAppASP.NET.Data;
+using FirstAppASP.NET.Repository;
 using Microsoft.EntityFrameworkCore;
 
 namespace FirstAppASP.NET
@@ -16,6 +17,7 @@ namespace FirstAppASP.NET
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DataBase"));
             });
+            builder.Services.AddScoped<IContactRepository, ContactRepository>();
 
             var app = builder.Build();
 
