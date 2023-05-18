@@ -1,9 +1,16 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FirstAppASP.NET.Models;
+using FirstAppASP.NET.Repository;
+using Microsoft.AspNetCore.Mvc;
 
 namespace FirstAppASP.NET.Controllers
 {
     public class ContatoController : Controller
     {
+        private readonly IContactRepository _contactRepository;
+        public ContatoController(IContactRepository contactRepository)
+        {
+            _contactRepository = contactRepository;
+        }
         public IActionResult Index()
         {
             return View();
@@ -26,6 +33,14 @@ namespace FirstAppASP.NET.Controllers
         public IActionResult Destroy()
         {
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult Store(ContactModel contact)
+        {
+            _contactRepository.Adding(contact);
+
+            return RedirectToAction("Index");
         }
     }
 }
