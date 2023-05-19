@@ -13,7 +13,9 @@ namespace FirstAppASP.NET.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+            List<ContactModel> contacts = _contactRepository.GetAll();
+
+            return View(contacts);
         }
         public IActionResult Create()
         {
