@@ -22,25 +22,26 @@ namespace FirstAppASP.NET.Controllers
             return View();
         }
 
-        public IActionResult Edit()
+        public IActionResult Edit( int id)
         {
-            return View();
+            ContactModel contact = _contactRepository.GetById(id);
+            return View(contact);
         }
 
-        public IActionResult DeleteConfirmation()
-        {
-            return View();
-        }
         
-        public IActionResult Destroy()
-        {
-            return View();
-        }
 
         [HttpPost]
         public IActionResult Store(ContactModel contact)
         {
             _contactRepository.Adding(contact);
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public IActionResult Update(ContactModel contact)
+        {
+            _contactRepository.Update(contact);
 
             return RedirectToAction("Index");
         }
