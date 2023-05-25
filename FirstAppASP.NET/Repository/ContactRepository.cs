@@ -7,21 +7,29 @@ namespace FirstAppASP.NET.Repository
     {
         private readonly BancoContext _bancoContext;
 
-        public ContactRepository(BancoContext bancoContext) 
-        { 
-            _bancoContext = bancoContext;
-        }
-        public ContactModel Adding(ContactModel contact)
+        public ContactRepository(BancoContext bancoContext)
         {
-            _bancoContext.Contacts.Add(contact);
-            _bancoContext.SaveChanges();
-            
-            return contact;
+            _bancoContext = bancoContext;
         }
 
         public List<ContactModel> GetAll()
         {
             return _bancoContext.Contacts.ToList();
         }
+
+        public ContactModel GetById(int id)
+        {
+            return _bancoContext.Contacts.FirstOrDefault(x => x.Id == id);
+        }
+
+        public ContactModel Adding(ContactModel contact)
+        {
+            _bancoContext.Contacts.Add(contact);
+            _bancoContext.SaveChanges();
+
+            return contact;
+        }
+
+
     }
 }
