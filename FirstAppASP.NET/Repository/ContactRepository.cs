@@ -47,6 +47,16 @@ namespace FirstAppASP.NET.Repository
 
         }
 
-        
+        public bool Destroy(int id)
+        {
+            ContactModel contactDB = GetById(id);
+
+            if (contactDB == null) throw new Exception("Houve um erro na deleção do contato");
+
+            _bancoContext.Contacts.Remove(contactDB);
+            _bancoContext.SaveChanges();
+
+            return true;
+        }
     }
 }
