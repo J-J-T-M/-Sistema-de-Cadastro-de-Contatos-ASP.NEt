@@ -9,6 +9,8 @@ namespace FirstAppASP.NET.Repository
         ContactModel GetById(int id);
         
         ContactModel Adding(ContactModel contact);
-      
+
+        ContactModel Update(ContactModel contact);
+
     }
 }
