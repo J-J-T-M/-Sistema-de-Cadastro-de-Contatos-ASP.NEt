@@ -44,17 +44,23 @@ namespace FirstAppASP.NET.Controllers
         [HttpPost]
         public IActionResult Store(ContactModel contact)
         {
-            _contactRepository.Adding(contact);
-
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                _contactRepository.Adding(contact);
+                return RedirectToAction("Index");
+            }
+            return View("Create", contact);
         }
 
         [HttpPost]
         public IActionResult Update(ContactModel contact)
         {
-            _contactRepository.Update(contact);
-
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                _contactRepository.Update(contact);
+                return RedirectToAction("Index");
+            }
+            return View("Edit", contact);
         }
     }
 }
