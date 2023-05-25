@@ -30,6 +30,23 @@ namespace FirstAppASP.NET.Repository
             return contact;
         }
 
+        public ContactModel Update(ContactModel contact)
+        {
+            ContactModel contactDB = GetById(contact.Id);
 
+            if (contactDB == null) throw new Exception("Houve um erro na atualização do contato");
+
+            contactDB.Name = contact.Name;
+            contactDB.Email = contact.Email;
+            contactDB.CellPhone = contact.CellPhone;
+
+            _bancoContext.Contacts.Update(contactDB);
+            _bancoContext.SaveChanges();
+
+            return contactDB;
+
+        }
+
+        
     }
 }
