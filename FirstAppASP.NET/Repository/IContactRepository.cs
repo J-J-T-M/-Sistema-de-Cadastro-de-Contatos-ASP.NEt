@@ -12,5 +12,7 @@ namespace FirstAppASP.NET.Repository
 
         ContactModel Update(ContactModel contact);
 
+        bool Destroy(int id);
+
     }
 }
