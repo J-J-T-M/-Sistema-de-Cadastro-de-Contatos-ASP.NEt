@@ -28,7 +28,18 @@ namespace FirstAppASP.NET.Controllers
             return View(contact);
         }
 
+        public IActionResult DeleteConfirmation( int id)
+        {
+            ContactModel contact = _contactRepository.GetById(id);
+            return View(contact);
+        }
         
+        public IActionResult Destroy( int id)
+        {
+            _contactRepository.Destroy(id);
+
+            return RedirectToAction("Index");
+        }
 
         [HttpPost]
         public IActionResult Store(ContactModel contact)
