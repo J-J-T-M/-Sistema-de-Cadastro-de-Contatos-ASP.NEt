@@ -44,12 +44,22 @@ namespace FirstAppASP.NET.Controllers
         [HttpPost]
         public IActionResult Store(ContactModel contact)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _contactRepository.Adding(contact);
+                if (ModelState.IsValid)
+                {
+                    _contactRepository.Adding(contact);
+                    TempData["SuccessMessage"] = "Contato cadastrado com sucesso!";
+                    return RedirectToAction("Index");
+                }
+                return View("Create", contact);
+            }
+            catch (Exception erro)
+            {
+                TempData["ErrorMessage"] = $"Ops, não conseguimos cadastrar o seu contato, tente novamente, detalhe do erro: {erro.Message}";
                 return RedirectToAction("Index");
             }
-            return View("Create", contact);
+        }
         }
 
         [HttpPost]
