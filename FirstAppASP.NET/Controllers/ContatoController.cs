@@ -36,9 +36,24 @@ namespace FirstAppASP.NET.Controllers
         
         public IActionResult Destroy( int id)
         {
-            _contactRepository.Destroy(id);
-
-            return RedirectToAction("Index");
+            try
+            {
+                bool delete =  _contactRepository.Destroy(id);
+                if (delete)
+                {
+                TempData["SuccessMessage"] = "Contato apagado com sucesso!";
+                }
+                else
+                {
+                    TempData["SuccessMessage"] = "Ops, não conseguimos apagar o seu contato!";
+                }
+                return RedirectToAction("Index");
+            }
+            catch (Exception erro)
+            {
+                TempData["ErrorMessage"] = $"Ops, não conseguimos apagar o seu contato, tente novamente, detalhe do erro: {erro.Message}";
+                return RedirectToAction("Index");
+            }
         }
 
         [HttpPost]
@@ -60,17 +75,26 @@ namespace FirstAppASP.NET.Controllers
                 return RedirectToAction("Index");
             }
         }
-        }
 
         [HttpPost]
         public IActionResult Update(ContactModel contact)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _contactRepository.Update(contact);
+                if (ModelState.IsValid)
+                {
+                    _contactRepository.Update(contact);
+                    TempData["SuccessMessage"] = "Contato atualizado com sucesso!";
+                    return RedirectToAction("Index");
+                }
+                return View("Edit", contact);
+            }
+            catch (Exception erro)
+            {
+
+                TempData["ErrorMessage"] = $"Ops, não conseguimos atualizar o seu contato, tente novamente, detalhe do erro: {erro.Message}";
                 return RedirectToAction("Index");
             }
-            return View("Edit", contact);
         }
     }
 }
