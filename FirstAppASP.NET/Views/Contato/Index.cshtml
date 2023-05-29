@@ -12,7 +12,7 @@
     {
     <div class="alert alert-success" role="alert">
         <button type="button" class="btn btn-danger btn-sm close-alert" arial-label="Close">X</button>
-        A simple success alert—check it out!
+            @TempData["SuccessMessage"]
     </div>     
     }
 
@@ -20,10 +20,10 @@
     {
     <div class="alert alert-danger" role="alert">
         <button type="button" class="btn btn-danger btn-sm close-alert" arial-label="Close">X</button>
-        A simple danger alert—check it out!
+            @TempData["ErrorMessage"]
     </div>
     }
-
+    <br />
     <h1 class="display-4">Listagem de contatos</h1>
        
     <table class="table">
